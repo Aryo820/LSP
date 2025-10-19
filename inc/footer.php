@@ -4,9 +4,9 @@
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
           <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">Append</span>
+            <span class="sitename">LSP MEDIA INFORMATIKA</span>
           </a>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+          <p>Membantu industri/organisasi meyakinkan klien bahwa produk/jasanya telah dibuat oleh tenaga-tenaga yang kompeten di bidang komputer dan informatika.</p>
           <div class="social-links d-flex mt-4">
             <a href=""><i class="bi bi-twitter-x"></i></a>
             <a href=""><i class="bi bi-facebook"></i></a>

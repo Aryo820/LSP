@@ -9,7 +9,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#" class="active">Home</a></li>
+          <li><a href="index.php" class="active">Home</a></li>
           <li class="dropdown">
             <a href="#"><span>Profile</span><i></i><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
@@ -31,8 +31,8 @@
           <li class="dropdown">
             <a href="#"><span>Galeri</span><i></i><i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="?page=galeri-foto">Galeri Foto</a></li>
-              <li><a href="?page=galeri-video">Galeri Video</a></li>
+              <li><a href="?page=galeri/galeriFoto">Galeri Foto</a></li>
+              <li><a href="?page=galeri/galeriVideo">Galeri Video</a></li>
             </ul>
           </li>
           <li><a href="?page=kontak">Kontak</a></li>
@@ -40,7 +40,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="">Login</a>
+      <a class="btn-getstarted" href="login.php">Login</a>
 
     </div>
   </header>
