@@ -30,37 +30,28 @@ if (isset($_POST['simpan'])) {
   // '$config' diasumsikan sebagai variabel koneksi ke database yang sudah dibuat sebelumnya.
   $query = mysqli_query($config, "INSERT INTO contacts (name, email, subject, message)
                                     VALUES ('$name','$email','$subject','$message')");
-
-  // Memeriksa apakah proses query (penyimpanan data ke database) berhasil atau tidak.
-  if ($query) {
-    // Jika query berhasil (data berhasil disimpan ke database),
-    // maka pengguna akan dialihkan kembali ke halaman 'index.php'.
-    // header() digunakan untuk mengirimkan header HTTP mentah, dalam hal ini untuk pengalihan (redirect).
-    // CATATAN PENTING: Seharusnya ada 'Location: ' sebelum 'index.php' untuk redirect yang benar.
-    // Contoh: header("Location: index.php");
-    header("?page=kontak"); // BARIS INI KEMUNGKINAN BESAR SALAH DAN HARUSNYA 'Location: index.php'
-  } else {
-    // Jika query gagal (data tidak berhasil disimpan, mungkin ada kesalahan pada database atau query SQL),
-    // maka akan menampilkan pesan "gagal" di browser.
-    echo "gagal";
-  }
+ header("Location: ?page=profile=success");
+    die;
 }
 ?>
 
 <!-- Contact Section -->
-<section id="contact" class="contact section">
+<!-- <section id="contact" class="contact section"> -->
 
   <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
-    <h2>Contact</h2>
-     <nav aria-label="breadcrumb">
-                <ol class="breadcrumb justify-content-center">
+  <section id="page-header" class="section dark-background bg-image">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+        <div class="header-content text-center"> 
+            <h1>Galeri Foto</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center"> 
                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Galeri Foto</li> 
                 </ol>
             </nav>
-
-  </div>
+        </div>
+    </div>
+</section>
   
   <!-- End Section Title -->
 

@@ -1,15 +1,16 @@
-<!-- Page Title -->
-<div class="page-title" data-aos="fade">
-    <div class="container">
-        <nav class="breadcrumbs">
-            <ol>
-                <li><a href="index.php">Home</a></li>
-                <li class="current">Visi dan Misi</li>
-            </ol>
-        </nav>
-        <h1>Visi dan Misi</h1>
+<section id="page-header" class="section dark-background bg-image">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+        <div class="header-content text-center"> 
+            <h1>Visi & Misi</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center"> 
+                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">VISI & MISI</li> 
+                </ol>
+            </nav>
+        </div>
     </div>
-</div><!-- End Page Title -->
+</section>
 
 <!-- Visi & Misi Section -->
 <section id="visi-misi" class="visi-misi section">

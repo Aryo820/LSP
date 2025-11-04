@@ -3,6 +3,7 @@ session_start();
 require_once 'config/koneksi.php';
 
 if (isset($_POST['login'])) {
+  $username = $_POST['username'];
   $email    = $_POST['email'];
   $password = $_POST['password'];
 
@@ -13,7 +14,7 @@ if (isset($_POST['login'])) {
 
     $_SESSION['id'] = $rowLogin['id'];
     $_SESSION['name'] = $rowLogin['name'];
-    header("location:index.php");
+    header("location:menu.php");
     die;
   } else {
     header("location:login.php?login=failed");

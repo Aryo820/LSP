@@ -1,32 +1,47 @@
+ <?php
+// Memulai session agar bisa menggunakan $_SESSION
+session_start();
+
+// Membuat session ID baru dan menghapus session ID lama untuk meningkatkan keamanan (mencegah session fixation)
+session_regenerate_id();
+
+// Mengaktifkan output buffering (penyimpanan output sementara sebelum dikirim ke browser)
+ob_start();
+
+// Membersihkan output buffer, menghapus semua isi buffer (jika ada output sebelumnya)
+ob_clean();
+
+// Memanggil file koneksi ke database
+require_once 'config/koneksi.php';
+
+// Mengecek apakah session 'id' kosong (belum login atau session habis)
+if (empty($_SESSION['id'])) {
+	// Jika belum login, arahkan pengguna ke halaman logout (biasanya akan diarahkan ke login page lagi)
+	header('Location: logout.php');
+}
+?>
+ 
+ 
+ 
  <main class="main">
 
    <!-- Hero Section -->
-   <!-- <section id="hero" class="hero section dark-background"> -->
+    
+  <section id="hero" class="hero section dark-background">
 
-   <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-     <div class="carousel-inner">
-       <div class="carousel-item active">
-         <img src="upload/cro.jpg" class="d-block w-100" alt="...">
-       </div>
-       <div class="carousel-item">
-         <img src="upload/el.jpg" class="d-block w-100" alt="...">
-       </div>
-       <div class="carousel-item">
-         <img src="upload/IMG-.png" class="d-block w-100" alt="...">
-       </div>
-     </div>
-     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-       <span class="visually-hidden">Previous</span>
-     </button>
-     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-       <span class="visually-hidden">Next</span>
-     </button>
-   </div>
+      <img src="content/upload/work_2.webp" alt="" data-aos="fade-in">
 
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5">
+            <h2 data-aos="fade-up" data-aos-delay="100">Selamat Datang</h2>
+            <p data-aos="fade-up" data-aos-delay="200">Di Website Badan Nasional Sertifikat Profesi Media Informatika</p>
+          </div>
+        </div>
+      </div>
 
-   </section><!-- /Hero ->
+    </section>
+ <!-- /Hero ->
 
    <-- About Section -->
    <section id="about" class="about section light-background">
@@ -36,13 +51,13 @@
 
          <div class="col-xl-5 content">
            <h3 class="mb-3">Tentang Kami</h3>
-           <p>Salah satu tujuan Pemerintah Indonesia adalah mendorong 
+           <p class="text-justify">Salah satu tujuan Pemerintah Indonesia adalah mendorong 
             percepatan pengakuan sertifikasi kompetensi kerja secara berkelanjutan pada bidang 
             profesi Teknologi Informasi dan Komunikasi yang infrastrukturnya telah siap untuk 
             melaksanakan proses sertifikasi.
           </p>
           
-            <p>
+            <p class="text-justify">
               Untuk merealisasikan percepatan pelaksanaan 
             sertifikasi kompetensi, Badan Nasional Sertifikat Profesi (BNSP) telah memberikan 
             lisensi kepada Lembaga Sertifikasi Profesi Media Informatika pada tanggal 25 April 
@@ -56,32 +71,32 @@
              <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
                <div class="icon-box">
                  <i class="bi bi-buildings"></i>
-                 <h3>Eius provident</h3>
-                 <p>Magni repellendus vel ullam hic officia accusantium ipsa dolor omnis dolor voluptatem</p>
+                 <h3>Terlisensi Resmi BNSP</h3>
+                 <p class="text-justify">Lisensi Resmi BNSP menjamin validitas dan kredibilitas sertifikat sesuai standar Badan Nasional Sertifikasi Profesi.</p>
                </div>
              </div> <!-- End Icon Box -->
 
              <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
                <div class="icon-box">
                  <i class="bi bi-clipboard-pulse"></i>
-                 <h3>Rerum aperiam</h3>
-                 <p>Autem saepe animi et aut aspernatur culpa facere. Rerum saepe rerum voluptates quia</p>
+                 <h3>Skema Sertifikasi Beragam</h3>
+                 <p class="text-justify">Menyediakan beragam skema sertifikasi di bidang TIK yang relevan dengan kebutuhan industri</p>
                </div>
              </div> <!-- End Icon Box -->
 
              <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
                <div class="icon-box">
-                 <i class="bi bi-command"></i>
-                 <h3>Veniam omnis</h3>
-                 <p>Omnis perferendis molestias culpa sed. Recusandae quas possimus. Quod consequatur corrupti</p>
-               </div>
+                 <i class="bi bi-graph-up-arrow"></i>
+                 <h3>Proses Sertifikasi Efisien</h3>
+                 <p class="text-justify">Tahapan uji kompetensi terstruktur, transparan, dan efisien, didukung penuh oleh infrastruktur berbasis digital.</p>
+              </div>
              </div> <!-- End Icon Box -->
 
              <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
                <div class="icon-box">
-                 <i class="bi bi-graph-up-arrow"></i>
-                 <h3>Delares sapiente</h3>
-                 <p>Sint et dolor voluptas minus possimus nostrum. Reiciendis commodi eligendi omnis quideme lorenda</p>
+                 <i class="bi bi-person-circle"></i>
+                 <h3>Asesor Profesional</h3>
+                 <p class="text-justify">Didukung oleh tim asesor kompeten dengan pengalaman luas dan teruji di dunia kerja profesional bidang TIK.</p>
                </div>
              </div> <!-- End Icon Box -->
 
@@ -186,53 +201,6 @@
 
    </section><!-- /Services Section -->
 
-   <!-- Features Section -->
-   <section id="features" class="features section">
-
-     <!-- Section Title -->
-     <div class="container section-title" data-aos="fade-up">
-       <h2>Features</h2>
-       <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-     </div><!-- End Section Title -->
-
-     <div class="container">
-
-       <div class="row gy-4 align-items-center features-item">
-         <div class="col-lg-5 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-           <h3>Corporis temporibus maiores provident</h3>
-           <p>
-             Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-             velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-           </p>
-           <a href="#" class="btn btn-get-started">Get </a>
-         </div>
-         <div class="col-lg-7 order-1 order-lg-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
-           <div class="image-stack">
-             <img src="assets/img/features-light-1.jpg" alt="" class="stack-front">
-             <img src="assets/img/features-light-2.jpg" alt="" class="stack-back">
-           </div>
-         </div>
-       </div><!-- Features Item -->
-
-       <div class="row gy-4 align-items-stretch justify-content-between features-item ">
-         <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
-           <img src="assets/img/features-light-3.jpg" class="img-fluid" alt="">
-         </div>
-         <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
-           <h3>Sunt consequatur ad ut est nulla</h3>
-           <p>Cupiditate placeat cupiditate placeat est ipsam culpa. Delectus quia minima quod. Sunt saepe odit aut quia voluptatem hic voluptas dolor doloremque.</p>
-           <ul>
-             <li><i class="bi bi-check"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-             <li><i class="bi bi-check"></i><span> Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-             <li><i class="bi bi-check"></i> <span>Facilis ut et voluptatem aperiam. Autem soluta ad fugiat</span>.</li>
-           </ul>
-           <a href="#" class="btn btn-get-started align-self-start">Get Started</a>
-         </div>
-       </div><!-- Features Item -->
-
-     </div>
-
-   </section><!-- /Features Section -->
 
    <!-- Portfolio Section -->
    <section id="portfolio" class="portfolio section">

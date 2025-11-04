@@ -15,7 +15,7 @@
             <ul>
               <li><a href="?page=tentang-kami">Tentang Kami</a></li>
               <li><a href="?page=visi-misi">Visi dan Misi</a></li>
-              <li><a href="?page=sturktur">Sturktur Organisasi</a></li>
+              <li><a href="?page=struktur">Struktur Organisasi</a></li>
             </ul>
           </li>
           <li class="dropdown">
