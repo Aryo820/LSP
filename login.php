@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once 'config/koneksi.php';
+require_once 'admin/controller/koneksi.php';
+require_once 'admin/controller/functions.php';
 
 if (isset($_POST['login'])) {
-  $username = $_POST['username'];
   $email    = $_POST['email'];
   $password = $_POST['password'];
 
@@ -12,12 +12,13 @@ if (isset($_POST['login'])) {
   if (mysqli_num_rows($queryLogin) > 0) {
     $rowLogin = mysqli_fetch_assoc($queryLogin);
 
-    $_SESSION['id'] = $rowLogin['id'];
-    $_SESSION['name'] = $rowLogin['name'];
-    header("location:menu.php");
+    $_SESSION['id']       = $rowLogin['id'];
+    $_SESSION['username'] = $rowLogin['username'];
+
+    header("location:Menu.php");
     die;
   } else {
-    header("location:login.php?login=failed");
+    header("location:Login.php?Login=failed");
     die;
   }
 }
@@ -25,11 +26,12 @@ if (isset($_POST['login'])) {
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LSPMI Login</title>
- <link rel="icon" href="admin/content/uploads/Foto/logo-dapur-mama-niar.png" type="image/x-icon">
+  <title>Login | Cv. Al-Ikhlas</title>
+  <link rel="icon" href="admin/content/uploads/Foto/logo-dapur-mama-niar.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -47,11 +49,25 @@ if (isset($_POST['login'])) {
     }
 
     @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      25% { background-position: 50% 50%; }
-      50% { background-position: 100% 50%; }
-      75% { background-position: 50% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      25% {
+        background-position: 50% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      75% {
+        background-position: 50% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     .login-card {
@@ -88,12 +104,13 @@ if (isset($_POST['login'])) {
     }
   </style>
 </head>
+
 <body>
 
   <div class="login-card">
     <div class="text-center mb-4">
-      <img  src="https://lspmi.co.id/img/Logo%20lspmi.webp" alt="Logo" class="mb-3" style="max-width: 100px;" type="image/x-icon">
-      <h2 class="fw-semibold">LSPMI Login</h2>
+      <img src="admin/content/uploads/Foto/logo-dapur-mama-niar.png" alt="Logo" class="mb-3" style="max-width: 100px;" type="image/x-icon">
+      <h2 class="fw-semibold">Cv. Al-Ikhlas</h2>
       <p class="text-muted mb-0">Silakan masuk ke akun Anda</p>
     </div>
 
@@ -153,4 +170,5 @@ if (isset($_POST['login'])) {
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

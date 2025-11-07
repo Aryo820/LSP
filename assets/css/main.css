@@ -2876,7 +2876,7 @@ section,
   background-position: center;
   background-repeat: no-repeat;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(../../content/upload/Logo_lspmi.webp);
+    url(../../contentLandingpage/upload/Logo_lspmi.webp);
 }
 
 .text-justify {

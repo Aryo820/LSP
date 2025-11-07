@@ -12,12 +12,12 @@ ob_start();
 ob_clean();
 
 // Memanggil file koneksi ke database
-require_once 'config/koneksi.php';
+require_once 'admin/controller/koneksi.php';
 
 // Mengecek apakah session 'id' kosong (belum login atau session habis)
 if (empty($_SESSION['id'])) {
 	// Jika belum login, arahkan pengguna ke halaman logout (biasanya akan diarahkan ke login page lagi)
-	header('Location: logout.php');
+	header('Location: keluar.php');
 }
 ?>
  
@@ -29,7 +29,7 @@ if (empty($_SESSION['id'])) {
     
   <section id="hero" class="hero section dark-background">
 
-      <img src="content/upload/work_2.webp" alt="" data-aos="fade-in">
+      <img src="contentLandingpage/upload/work_2.webp" alt="" data-aos="fade-in">
 
       <div class="container">
         <div class="row">

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Okt 2025 pada 06.20
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Generation Time: Nov 04, 2025 at 07:15 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `contacts`
+-- Table structure for table `contacts`
 --
 
 CREATE TABLE `contacts` (
@@ -38,7 +38,7 @@ CREATE TABLE `contacts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=dec8 COLLATE=dec8_bin;
 
 --
--- Dumping data untuk tabel `contacts`
+-- Dumping data for table `contacts`
 --
 
 INSERT INTO `contacts` (`id`, `name`, `email`, `subject`, `message`, `created_at`, `updated_at`) VALUES
@@ -52,7 +52,7 @@ INSERT INTO `contacts` (`id`, `name`, `email`, `subject`, `message`, `created_at
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `level`
+-- Table structure for table `level`
 --
 
 CREATE TABLE `level` (
@@ -64,7 +64,7 @@ CREATE TABLE `level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `level`
+-- Dumping data for table `level`
 --
 
 INSERT INTO `level` (`id`, `level_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -74,7 +74,40 @@ INSERT INTO `level` (`id`, `level_name`, `created_at`, `updated_at`, `deleted_at
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `profil`
+--
+
+CREATE TABLE `profil` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `no_ktp` varchar(20) NOT NULL,
+  `jenis_kelamin` varchar(20) NOT NULL,
+  `tempat_lahir` varchar(100) NOT NULL,
+  `tanggal_lahir` date NOT NULL,
+  `alamat` text NOT NULL,
+  `kebangsaan` varchar(50) DEFAULT 'Indonesia',
+  `provinsi` varchar(100) NOT NULL,
+  `kota` varchar(100) NOT NULL,
+  `kode_pos` varchar(10) DEFAULT NULL,
+  `no_telp_rumah` varchar(20) DEFAULT NULL,
+  `no_telp_kantor` varchar(20) DEFAULT NULL,
+  `no_hp` varchar(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `profil`
+--
+
+INSERT INTO `profil` (`id`, `nama`, `no_ktp`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `kebangsaan`, `provinsi`, `kota`, `kode_pos`, `no_telp_rumah`, `no_telp_kantor`, `no_hp`, `created_at`, `updated_at`) VALUES
+(20, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-04', 'Rusun BLK Ps Rebo', 'Indonesia', 'ACEH', 'KABUPATEN ACEH JAYA', '13750', '-', '-', '08129467849', '2025-11-04 15:26:39', '2025-11-04 15:26:39'),
+(21, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-04', 'Rusun BLK Ps Rebo', 'Indonesia', 'DKI JAKARTA', 'KOTA JAKARTA TIMUR', '13750', '-', '-', '08129467849', '2025-11-04 15:29:02', '2025-11-04 15:29:02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -82,6 +115,7 @@ CREATE TABLE `user` (
   `id_level` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `address` text NOT NULL,
   `password` varchar(255) NOT NULL,
   `profile_picture` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -90,34 +124,40 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `id_level`, `username`, `email`, `password`, `profile_picture`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, 1, 'Muhammad Siddiq', 'admin@gmail.com', '123', NULL, '2025-07-22 08:52:21', '2025-07-22 08:52:21', NULL),
-(20, 5, 'Agra Saputra', 'operator@gmail.com', '123', NULL, '2025-07-22 09:44:32', '2025-07-22 09:44:32', NULL),
-(22, 1, 'sodok', 'sodok@gmail.com', '1234', NULL, '2025-08-08 08:29:59', '2025-08-08 08:29:59', NULL),
-(23, 0, 'farhman budi', 'budi@gmail.com', '123', NULL, '2025-10-15 12:38:19', '2025-10-15 12:38:19', NULL);
+INSERT INTO `user` (`id`, `id_level`, `username`, `email`, `address`, `password`, `profile_picture`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(3, 1, 'Muhammad Siddiq', 'admin@gmail.com', '', '123', NULL, '2025-07-22 08:52:21', '2025-07-22 08:52:21', NULL),
+(20, 5, 'Agra Saputra', 'operator@gmail.com', 'Rusun BLK Ps Rebo', '123', 'Gambar20.png', '2025-07-22 09:44:32', '2025-11-04 16:32:10', NULL),
+(22, 1, 'sodok', 'sodok@gmail.com', '', '1234', NULL, '2025-08-08 08:29:59', '2025-08-08 08:29:59', NULL),
+(23, 0, 'farhman budi', 'budi@gmail.com', '', '123', NULL, '2025-10-15 12:38:19', '2025-10-15 12:38:19', NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `contacts`
+-- Indexes for table `contacts`
 --
 ALTER TABLE `contacts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `level`
+-- Indexes for table `level`
 --
 ALTER TABLE `level`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `level_name` (`level_name`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `profil`
+--
+ALTER TABLE `profil`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
@@ -126,23 +166,29 @@ ALTER TABLE `user`
   ADD KEY `user_ibfk_1` (`id_level`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `contacts`
+-- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- AUTO_INCREMENT untuk tabel `level`
+-- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `profil`
+--
+ALTER TABLE `profil`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;

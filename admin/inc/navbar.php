@@ -1,361 +1,61 @@
- <?php
-  // getting account data
-  $idNav = $_SESSION['id'];
-  $queryNav = mysqli_query($config, "SELECT user.*, level.level_name FROM user LEFT JOIN level ON user.id_level = level.id WHERE user.id = '$idNav'");
-  $rowNav  = mysqli_fetch_array($queryNav);
+  <?php
+  include 'admin/controller/koneksi.php';
+  // Memanggil file yang berisi fungsi-fungsi tambahan
+  include 'admin/controller/functions.php';
+  $navbarID = $_SESSION['id'];
+  $queryNavbar = mysqli_query($config, "SELECT * FROM user WHERE id = '$navbarID'");
+  $dataNavbar = mysqli_fetch_assoc($queryNavbar);
   ?>
 
+  <nav class="topnav navbar navbar-light">
+    <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
+      <i class="fe fe-menu navbar-toggler-icon"></i>
+    </button>
+    <form class="form-inline mr-auto searchform text-muted">
+      <input class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted" type="search" placeholder="Ketik Sesuatu..." aria-label="Search">
+    </form>
 
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="dark">
+          <i class="fe fe-sun fe-16"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-shortcut">
+          <span class="fe fe-grid fe-16"></span>
+        </a>
+      </li>
+      <li class="nav-item nav-notif">
+        <a class="nav-link text-muted my-2" href="./#" data-toggle="modal" data-target=".modal-notif">
+          <span class="fe fe-bell fe-16"></span>
+          <span class="dot dot-md bg-success"></span>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="avatar avatar-sm mt-2">
+            <img style=" width: 40px; height: 40px;" src="<?= !empty($dataNavbar['profile_picture']) && file_exists('admin/content/uploads/Foto/' . $dataNavbar['profile_picture'])
+                        ? 'admin/content/uploads/Foto/' . $dataNavbar['profile_picture']
+                        : 'https://placehold.co/100' ?>"
+              alt="..." class="avatar-img rounded-circle">
 
-<nav
-            class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
-          >
-            <div class="container-fluid">
-              <nav
-                class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
-              >
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <button type="submit" class="btn btn-search pe-1">
-                      <i class="fa fa-search search-icon"></i>
-                    </button>
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Search ..."
-                    class="form-control"
-                  />
-                </div>
-              </nav>
+          </span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="?page=profil-saya/my-profile">Profil</a>
+          <a class="dropdown-item" href="#">Aktivitas</a>
+          <button class="dropdown-item btn btn-danger" onclick="confirmLogout()">Keluar</button>
 
-              <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-                <li
-                  class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
-                >
-                  <a
-                    class="nav-link dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <i class="fa fa-search"></i>
-                  </a>
-                  <ul class="dropdown-menu dropdown-search animated fadeIn">
-                    <form class="navbar-left navbar-form nav-search">
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          placeholder="Search ..."
-                          class="form-control"
-                        />
-                      </div>
-                    </form>
-                  </ul>
-                </li>
-                <li class="nav-item topbar-icon dropdown hidden-caret">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    id="messageDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i class="fa fa-envelope"></i>
-                  </a>
-                  <ul
-                    class="dropdown-menu messages-notif-box animated fadeIn"
-                    aria-labelledby="messageDropdown"
-                  >
-                    <li>
-                      <div
-                        class="dropdown-title d-flex justify-content-between align-items-center"
-                      >
-                        Messages
-                        <a href="#" class="small">Mark all as read</a>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="message-notif-scroll scrollbar-outer">
-                        <div class="notif-center">
-                          <a href="#">
-                            <div class="notif-img">
-                              <img
-                                src="template/assets/img/jm_denis.jpg"
-                                alt="Img Profile"
-                              />
-                            </div>
-                            <div class="notif-content">
-                              <span class="subject">Jimmy Denis</span>
-                              <span class="block"> How are you ? </span>
-                              <span class="time">5 minutes ago</span>
-                            </div>
-                          </a>
-                          <a href="#">
-                            <div class="notif-img">
-                              <img
-                                src="template/assets/img/chadengle.jpg"
-                                alt="Img Profile"
-                              />
-                            </div>
-                            <div class="notif-content">
-                              <span class="subject">Chad</span>
-                              <span class="block"> Ok, Thanks ! </span>
-                              <span class="time">12 minutes ago</span>
-                            </div>
-                          </a>
-                          <a href="#">
-                            <div class="notif-img">
-                              <img
-                                src="template/assets/img/mlane.jpg"
-                                alt="Img Profile"
-                              />
-                            </div>
-                            <div class="notif-content">
-                              <span class="subject">Jhon Doe</span>
-                              <span class="block">
-                                Ready for the meeting today...
-                              </span>
-                              <span class="time">12 minutes ago</span>
-                            </div>
-                          </a>
-                          <a href="#">
-                            <div class="notif-img">
-                              <img
-                                src="template/assets/img/talha.jpg"
-                                alt="Img Profile"
-                              />
-                            </div>
-                            <div class="notif-content">
-                              <span class="subject">Talha</span>
-                              <span class="block"> Hi, Apa Kabar ? </span>
-                              <span class="time">17 minutes ago</span>
-                            </div>
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <a class="see-all" href="javascript:void(0);"
-                        >See all messages<i class="fa fa-angle-right"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-item topbar-icon dropdown hidden-caret">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    id="notifDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i class="fa fa-bell"></i>
-                    <span class="notification">4</span>
-                  </a>
-                  <ul
-                    class="dropdown-menu notif-box animated fadeIn"
-                    aria-labelledby="notifDropdown"
-                  >
-                    <li>
-                      <div class="dropdown-title">
-                        You have 4 new notification
-                      </div>
-                    </li>
-                    <li>
-                      <div class="notif-scroll scrollbar-outer">
-                        <div class="notif-center">
-                          <a href="#">
-                            <div class="notif-icon notif-primary">
-                              <i class="fa fa-user-plus"></i>
-                            </div>
-                            <div class="notif-content">
-                              <span class="block"> New user registered </span>
-                              <span class="time">5 minutes ago</span>
-                            </div>
-                          </a>
-                          <a href="#">
-                            <div class="notif-icon notif-success">
-                              <i class="fa fa-comment"></i>
-                            </div>
-                            <div class="notif-content">
-                              <span class="block">
-                                Rahmad commented on Admin
-                              </span>
-                              <span class="time">12 minutes ago</span>
-                            </div>
-                          </a>
-                          <a href="#">
-                            <div class="notif-img">
-                              <img
-                                src="template/assets/img/profile2.jpg"
-                                alt="Img Profile"
-                              />
-                            </div>
-                            <div class="notif-content">
-                              <span class="block">
-                                Reza send messages to you
-                              </span>
-                              <span class="time">12 minutes ago</span>
-                            </div>
-                          </a>
-                          <a href="#">
-                            <div class="notif-icon notif-danger">
-                              <i class="fa fa-heart"></i>
-                            </div>
-                            <div class="notif-content">
-                              <span class="block"> Farrah liked Admin </span>
-                              <span class="time">17 minutes ago</span>
-                            </div>
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <a class="see-all" href="javascript:void(0);"
-                        >See all notifications<i class="fa fa-angle-right"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-item topbar-icon dropdown hidden-caret">
-                  <a
-                    class="nav-link"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    aria-expanded="false"
-                  >
-                    <i class="fas fa-layer-group"></i>
-                  </a>
-                  <div class="dropdown-menu quick-actions animated fadeIn">
-                    <div class="quick-actions-header">
-                      <span class="title mb-1">Quick Actions</span>
-                      <span class="subtitle op-7">Shortcuts</span>
-                    </div>
-                    <div class="quick-actions-scroll scrollbar-outer">
-                      <div class="quick-actions-items">
-                        <div class="row m-0">
-                          <a class="col-6 col-md-4 p-0" href="#">
-                            <div class="quick-actions-item">
-                              <div class="avatar-item bg-danger rounded-circle">
-                                <i class="far fa-calendar-alt"></i>
-                              </div>
-                              <span class="text">Calendar</span>
-                            </div>
-                          </a>
-                          <a class="col-6 col-md-4 p-0" href="#">
-                            <div class="quick-actions-item">
-                              <div
-                                class="avatar-item bg-warning rounded-circle"
-                              >
-                                <i class="fas fa-map"></i>
-                              </div>
-                              <span class="text">Maps</span>
-                            </div>
-                          </a>
-                          <a class="col-6 col-md-4 p-0" href="#">
-                            <div class="quick-actions-item">
-                              <div class="avatar-item bg-info rounded-circle">
-                                <i class="fas fa-file-excel"></i>
-                              </div>
-                              <span class="text">Reports</span>
-                            </div>
-                          </a>
-                          <a class="col-6 col-md-4 p-0" href="#">
-                            <div class="quick-actions-item">
-                              <div
-                                class="avatar-item bg-success rounded-circle"
-                              >
-                                <i class="fas fa-envelope"></i>
-                              </div>
-                              <span class="text">Emails</span>
-                            </div>
-                          </a>
-                          <a class="col-6 col-md-4 p-0" href="#">
-                            <div class="quick-actions-item">
-                              <div
-                                class="avatar-item bg-primary rounded-circle"
-                              >
-                                <i class="fas fa-file-invoice-dollar"></i>
-                              </div>
-                              <span class="text">Invoice</span>
-                            </div>
-                          </a>
-                          <a class="col-6 col-md-4 p-0" href="#">
-                            <div class="quick-actions-item">
-                              <div
-                                class="avatar-item bg-secondary rounded-circle"
-                              >
-                                <i class="fas fa-credit-card"></i>
-                              </div>
-                              <span class="text">Payments</span>
-                            </div>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+          <script>
+            function confirmLogout() {
+              if (confirm("Apakah Anda yakin ingin keluar?")) {
+                window.location.href = "?page=keluar";
+              }
+            }
+          </script>
 
-                <li class="nav-item topbar-user dropdown hidden-caret">
-                  <a
-                    class="dropdown-toggle profile-pic"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    aria-expanded="false"
-                  >
-                    <div class="avatar-sm">
-                      <img
-                        src="<?= !empty($rowNav['profile_picture']) && file_exists('admin/img/profile_picture/' . $rowNav['profile_picture']) ? 'admin/img/profile_picture/' . $rowNav['profile_picture'] : 'https://placehold.co/100' ?>"
-                        alt="..."
-                        class="avatar-img rounded-circle"
-                      />
-                    </div>
-                    <span class="profile-username">
-                      <span class="op-7">Hi,</span>
-                      <span class="fw-bold"><?= isset($rowNav['username']) ? $rowNav['username'] : '-- your name --' ?></span>
-                    </span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-user animated fadeIn">
-                    <div class="dropdown-user-scroll scrollbar-outer">
-                      <li>
-                        <div class="user-box">
-                          <div class="avatar-lg">
-                            <img
-                              src="<?= !empty($rowNav['profile_picture']) && file_exists('admin/img/profile_picture/' . $rowNav['profile_picture']) ? 'admin/img/profile_picture/' . $rowNav['profile_picture'] : 'https://placehold.co/100' ?>"
-                              alt="image profile"
-                              class="avatar-img rounded"
-                            />
-                          </div>
-                          <div class="u-text">
-                            <h4><?= isset($rowNav['username']) ? $rowNav['username'] : '-- your name --' ?></h4>
-                            <p class="text-muted"><?= isset($rowNav['email']) ? $rowNav['email'] : '-- your name --' ?></p>
-                            <a
-                              href="?page=profilsaya"
-                              class="btn btn-xs btn-secondary btn-sm"
-                              >View Profile</a
-                            >
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="#">My Balance</a>
-                        <a class="dropdown-item" href="#">Inbox</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Account Setting</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
-                      </li>
-                    </div>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </nav>
+        </div>
+      </li>
+    </ul>
+  </nav>

@@ -1,11 +1,13 @@
 <?php
 session_start();
-require_once 'config/Koneksi.php'; 
+require_once 'admin/controller/Koneksi.php';
+require_once 'admin/controller/functions.php';
 
 if (isset($_POST['register'])) {
   $username = $_POST['username'];
   $email = $_POST['email'];
   $password = $_POST['password'];
+  $id_level = $_POST['id_level'];
 
   $queryValidationEmail = mysqli_query($config, "SELECT * FROM user WHERE email = '$email'");
   $queryValidationUsername = mysqli_query($config, "SELECT * FROM user WHERE username = '$username'");
@@ -19,17 +21,16 @@ if (isset($_POST['register'])) {
     header("location: ?error=notAgreeTerms");
     die;
   } else {
-    $queryRegister = mysqli_query($config, "INSERT INTO user ( username, email, password) VALUES ('$username', '$email', '$password')");
+    $queryRegister = mysqli_query($config, "INSERT INTO user (id_level, username, email, password) VALUES ('$id_level', '$username', '$email', '$password')");
     if (!$queryRegister) {
       header("location: ?error=registerFailed");
       die;
     } else {
-      header("location: index.php?register=success");
+      header("location: Login.php?register=success");
       die;
     }
   }
 }
-
 $queryLevel = mysqli_query($config, "SELECT * FROM level ORDER BY id ASC"); // ðŸ”¹ Tambahan supaya $queryLevel ada
 ?>
 
@@ -37,7 +38,7 @@ $queryLevel = mysqli_query($config, "SELECT * FROM level ORDER BY id ASC"); // ð
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Regsiter | LSPMI </title>
+  <title>Regsiter | CV. AL- Ikhlas</title>
    <link rel="icon" href="admin/content/uploads/Foto/dpn.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -96,8 +97,8 @@ $queryLevel = mysqli_query($config, "SELECT * FROM level ORDER BY id ASC"); // ð
 
 <div class="card">
    <div class="text-center mb-4">
-      <img src="https://lspmi.co.id/img/Logo%20lspmi.webp" alt="Logo" class="mb-3" style="max-width: 100px;">
-      <h2 class="fw-semibold">LSPMI Registration</h2>
+      <img src="admin/content/uploads/Foto/logo-dapur-mama-niar.png" alt="Logo" class="mb-3" style="max-width: 100px;">
+      <h2 class="fw-semibold">Dapur Mama Niar</h2>
       <p class="text-muted mb-0">Silakan daftarkan akun Anda</p>
     </div> 
 
@@ -123,6 +124,14 @@ $queryLevel = mysqli_query($config, "SELECT * FROM level ORDER BY id ASC"); // ð
       <input type="email" class="form-control" name="email" placeholder="Email" required value="<?= $_POST['email'] ?? '' ?>">
     </div>
     <div class="mb-3">
+      <select class="form-select" name="id_level" required>
+        <option value="">-- Pilih Level --</option>
+        <?php while ($level = mysqli_fetch_assoc($queryLevel)) : ?>
+          <option value="<?= $level['id'] ?>"><?= $level['level_name'] ?></option>
+        <?php endwhile; ?>
+      </select>
+    </div>
+    <div class="mb-3">
       <div class="input-group">
         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
         <span class="input-group-text"><i class="bi bi-eye-slash" id="togglePassword" style="cursor:pointer;"></i></span>
@@ -131,7 +140,7 @@ $queryLevel = mysqli_query($config, "SELECT * FROM level ORDER BY id ASC"); // ð
     <div class="form-check mb-3">
       <input class="form-check-input" type="checkbox" name="terms" id="terms">
       <label class="form-check-label" for="terms">
-        Saya menyetujui <a href="#" class="text-primary">Syarat & Ketentuan</a>
+        Saya menyetujui <a href="#" class="text-primary">syarat & ketentuan</a>
       </label>
     </div>
     <div class="d-grid">

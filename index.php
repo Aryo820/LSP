@@ -45,10 +45,10 @@
   <main class="main">
     <?php
     if (isset($_GET['page'])) {
-      if (file_exists("content/" . $_GET['page'] . ".php")) {
-        include "content/" . $_GET['page'] . ".php";
+      if (file_exists("contentLandingpage/" . $_GET['page'] . ".php")) {
+        include "contentLandingpage/" . $_GET['page'] . ".php";
       } else {
-        include "content/notfound.php";
+        include "contentLandingpage/notfound.php";
       }
     } else {
       include "home.php";

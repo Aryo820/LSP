@@ -1,63 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Project Muhammad Siddiq</title>
-    <link rel="shortcut icon" type="image/png" href="https://img.freepik.com/premium-vector/simple-laundry-logo_756483-88.jpg?semt=ais_hybrid&w=740" />
-    <meta
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-      name="viewport"
-    />
-    <?php include 'admin/inc/cdnAtas.php' ?>
-  </head>
-  <body>
-    <div class="wrapper">
-      <!-- Sidebar -->
-       <?php include 'admin/inc/sidebar.php' ?>
-      <!-- End Sidebar -->
-      <div class="main-panel">
-        <div class="main-header">
-          <div class="main-header-logo">
-      <!-- Logo Header -->
-           <?php include 'admin/inc/logoHeader.php' ?>
-      <!-- End Logo Header -->
-          </div>
-      <!-- Navbar Header -->
-          <?php include 'admin/inc/navbar.php'?>
-      <!-- End Navbar -->
-        </div>
-       <!-- start isi content -->
-        <div class="container">
-          <div class="page-inner">
-            <h5>Selamat Datang </h5>
-            <div
-              class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
-            >
-        <!-- isi disini contentnya -->
-              <?php
-            if (isset($_GET['page'])) {
-              if (file_exists("content/" . $_GET['page'] . ".php")) {
-                include "content/" . $_GET['page'] . ".php";
-              } else {
-                include "content/notfound.php";
-              }
-            } else {
-              include "content/beranda.php";
-            }
-            ?>
-      <!-- batas sampe sini -->
-            </div>
-          </div>
-        </div>
-      <!-- End isi content -->
-      <!-- start footer -->
-     <?php include 'admin/inc/footer.php' ?>
-      </div>
+<?php
+// Memulai session agar bisa menggunakan $_SESSION
+session_start();
 
-      <!-- Custom template | don't include it in your project! -->
-    <?php include 'admin/inc/customTemp.php' ?>
-      <!-- End Custom template -->
-    </div>
-    <?php include 'admin/inc/cdnBawah.php' ?>
-  </body>
+// Membuat session ID baru dan menghapus session ID lama untuk meningkatkan keamanan (mencegah session fixation)
+session_regenerate_id();
+
+// Mengaktifkan output buffering (penyimpanan output sementara sebelum dikirim ke browser)
+ob_start();
+
+// Membersihkan output buffer, menghapus semua isi buffer (jika ada output sebelumnya)
+ob_clean();
+
+// Memanggil file koneksi ke database
+require_once 'admin/controller/koneksi.php';
+
+// Memanggil file yang berisi fungsi-fungsi tambahan
+
+
+// Mengecek apakah session 'id' kosong (belum login atau session habis)
+if (empty($_SESSION['id'])) {
+  // Jika belum login, arahkan pengguna ke halaman logout (biasanya akan diarahkan ke login page lagi)
+  header('Location: ?page=keluar');
+}
+?>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
+  <title>Beranda</title>
+  <?php include 'admin/inc/css.php' ?>
+</head>
+
+<body class="vertical  dark  ">
+  <div class="wrapper">
+    <?php include 'admin/inc/navbar.php' ?>
+    <?php include 'admin/inc/sidebar.php' ?>
+    <main role="main" class="main-content">
+
+      <!-- start konten utama  -->
+      <?php
+      // Memeriksa apakah parameter 'page' ada di URL.
+      if (isset($_GET['page'])) {
+        // Bersihkan input supaya aman
+        $page = str_replace(['..', './', '\\'], '', $_GET['page']);
+
+        if (file_exists("admin/contentAdmin/" . $page . ".php")) {
+          include('admin/contentAdmin/' . $page . ".php");
+        } else {
+          include "admin/contentAdmin/notfound/notfound.php";
+        }
+      } else {
+        include 'admin/contentAdmin/dashboard/dashboard.php';
+      }
+
+      ?>
+      <!-- end konten utama -->
+      <!-- .container-fluid -->
+      <?php include 'admin/inc/container.php' ?>
+    </main>
+    <!-- main -->
+  </div>
+  <!-- .wrapper -->
+  <?php include 'admin/inc/js.php' ?>
+</body>
+
 </html>
