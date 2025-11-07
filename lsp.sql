@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2025 at 07:15 PM
+-- Generation Time: Nov 07, 2025 at 05:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `lsp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assessment`
+--
+
+CREATE TABLE `assessment` (
+  `id` int(11) NOT NULL,
+  `nama_jadwal` varchar(150) NOT NULL,
+  `tuk` varchar(100) NOT NULL,
+  `pembiayaan` varchar(100) NOT NULL,
+  `tanggal_ujian` date NOT NULL,
+  `lokasi_ujian` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `assessment`
+--
+
+INSERT INTO `assessment` (`id`, `nama_jadwal`, `tuk`, `pembiayaan`, `tanggal_ujian`, `lokasi_ujian`, `created_at`, `updated_at`) VALUES
+(7, 'Uji Sertifikasi DMS 08 November 2025', 'KODEIN', 'Mandiri', '2025-11-14', 'Universitas Mercu Buana', '2025-11-05 16:18:53', '2025-11-05 16:18:53'),
+(8, 'Sertifikasi TUK LPK Wahana Semarang JOO 11 November 2025 (SmartMulti Training)', 'Smart Multi Training', 'Mandiri', '2025-11-29', 'Semarang', '2025-11-05 16:19:47', '2025-11-05 16:19:47');
 
 -- --------------------------------------------------------
 
@@ -52,6 +77,21 @@ INSERT INTO `contacts` (`id`, `name`, `email`, `subject`, `message`, `created_at
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kualifikasi_pendidikan`
+--
+
+CREATE TABLE `kualifikasi_pendidikan` (
+  `id` int(11) NOT NULL,
+  `jenjang_pendidikan` varchar(50) NOT NULL,
+  `instansi` varchar(255) NOT NULL,
+  `tahun_lulus` varchar(4) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `level`
 --
 
@@ -70,6 +110,24 @@ CREATE TABLE `level` (
 INSERT INTO `level` (`id`, `level_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Administrator', '2025-07-22 08:51:42', '2025-07-22 09:24:32', NULL),
 (5, 'Operator', '2025-07-22 08:54:00', '2025-07-22 08:54:00', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pekerjaan`
+--
+
+CREATE TABLE `pekerjaan` (
+  `id` int(11) NOT NULL,
+  `nama_institusi` varchar(100) NOT NULL,
+  `bidang_pekerjaan` varchar(100) NOT NULL,
+  `jabatan` varchar(100) NOT NULL,
+  `alamat_kantor` text NOT NULL,
+  `kodepos` varchar(10) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -102,7 +160,15 @@ CREATE TABLE `profil` (
 
 INSERT INTO `profil` (`id`, `nama`, `no_ktp`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `kebangsaan`, `provinsi`, `kota`, `kode_pos`, `no_telp_rumah`, `no_telp_kantor`, `no_hp`, `created_at`, `updated_at`) VALUES
 (20, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-04', 'Rusun BLK Ps Rebo', 'Indonesia', 'ACEH', 'KABUPATEN ACEH JAYA', '13750', '-', '-', '08129467849', '2025-11-04 15:26:39', '2025-11-04 15:26:39'),
-(21, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-04', 'Rusun BLK Ps Rebo', 'Indonesia', 'DKI JAKARTA', 'KOTA JAKARTA TIMUR', '13750', '-', '-', '08129467849', '2025-11-04 15:29:02', '2025-11-04 15:29:02');
+(21, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-04', 'Rusun BLK Ps Rebo', 'Indonesia', 'DKI JAKARTA', 'KOTA JAKARTA TIMUR', '13750', '-', '-', '08129467849', '2025-11-04 15:29:02', '2025-11-04 15:29:02'),
+(22, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-05', 'Rusun BLK Ps Rebo', 'Indonesia', 'DKI JAKARTA', 'KOTA JAKARTA TIMUR', '13750', '-', '-', '08129467849', '2025-11-04 19:01:54', '2025-11-04 19:01:54'),
+(23, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-05', 'wwwwwwwwwwwwwww', 'Indonesia', 'BANTEN', 'KOTA TANGERANG', '2222222222', '-', '-', '2222222222222222', '2025-11-04 19:12:24', '2025-11-04 19:12:24'),
+(24, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-05', 'Rusun BLK Ps Rebo', 'Indonesia', 'ACEH', 'KABUPATEN ACEH SELATAN', '13750', '-', '-', '08129467849', '2025-11-05 14:35:21', '2025-11-05 14:35:21'),
+(25, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-05', 'Rusun BLK Ps Rebo', 'Indonesia', 'ACEH', 'KABUPATEN ACEH SELATAN', '13750', '-', '-', '08129467849', '2025-11-05 14:36:41', '2025-11-05 14:36:41'),
+(26, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-05', 'Rusun BLK Ps Rebo', 'Indonesia', 'DKI JAKARTA', 'KOTA JAKARTA TIMUR', '13750', '', '', '08129467849', '2025-11-05 14:37:24', '2025-11-05 14:37:24'),
+(27, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-06', 'Rusun BLK Ps Rebo', 'Indonesia', 'DKI JAKARTA', 'KOTA JAKARTA TIMUR', '13750', '-', '-', '08129467849', '2025-11-05 17:24:04', '2025-11-05 17:24:04'),
+(28, 'Muhammad Siddiq', '3175050505050505', 'Laki-Laki', 'Jakarta', '2025-11-06', 'Rusun BLK Ps Rebo', 'Indonesia', 'SUMATERA UTARA', 'KABUPATEN ACEH TENGGARA', '13750', '-', '-', '08129467849', '2025-11-05 17:24:41', '2025-11-05 17:24:41'),
+(29, 'Muhammad Siddiq', '3175050505050505', 'Perempuan', 'Jakarta', '2025-11-06', 'Rusun BLK Ps Rebo', 'Indonesia', 'SUMATERA UTARA', 'KABUPATEN NIAS', '13750', '-', '-', '08129467849', '2025-11-05 17:26:47', '2025-11-05 17:26:47');
 
 -- --------------------------------------------------------
 
@@ -129,7 +195,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `id_level`, `username`, `email`, `address`, `password`, `profile_picture`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (3, 1, 'Muhammad Siddiq', 'admin@gmail.com', '', '123', NULL, '2025-07-22 08:52:21', '2025-07-22 08:52:21', NULL),
-(20, 5, 'Agra Saputra', 'operator@gmail.com', 'Rusun BLK Ps Rebo', '123', 'Gambar20.png', '2025-07-22 09:44:32', '2025-11-04 16:32:10', NULL),
+(20, 5, 'Agra Saputra', 'operator@gmail.com', 'Rusun BLK Ps Rebo', '123', 'Gambar20.jpg', '2025-07-22 09:44:32', '2025-11-05 17:28:24', NULL),
 (22, 1, 'sodok', 'sodok@gmail.com', '', '1234', NULL, '2025-08-08 08:29:59', '2025-08-08 08:29:59', NULL),
 (23, 0, 'farhman budi', 'budi@gmail.com', '', '123', NULL, '2025-10-15 12:38:19', '2025-10-15 12:38:19', NULL);
 
@@ -138,9 +204,21 @@ INSERT INTO `user` (`id`, `id_level`, `username`, `email`, `address`, `password`
 --
 
 --
+-- Indexes for table `assessment`
+--
+ALTER TABLE `assessment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `contacts`
 --
 ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `kualifikasi_pendidikan`
+--
+ALTER TABLE `kualifikasi_pendidikan`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -149,6 +227,12 @@ ALTER TABLE `contacts`
 ALTER TABLE `level`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `level_name` (`level_name`);
+
+--
+-- Indexes for table `pekerjaan`
+--
+ALTER TABLE `pekerjaan`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `profil`
@@ -170,10 +254,22 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `assessment`
+--
+ALTER TABLE `assessment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT for table `kualifikasi_pendidikan`
+--
+ALTER TABLE `kualifikasi_pendidikan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `level`
@@ -182,10 +278,16 @@ ALTER TABLE `level`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `pekerjaan`
+--
+ALTER TABLE `pekerjaan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `profil`
 --
 ALTER TABLE `profil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `user`
